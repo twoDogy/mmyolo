@@ -8,7 +8,7 @@ from mmdet.models.utils import multi_apply
 from mmdet.utils import (ConfigType, OptConfigType, OptInstanceList,
                          OptMultiConfig)
 from mmengine import MessageHub
-from mmengine.dist import get_dist_info
+# from mmengine.dist import get_dist_info
 from mmengine.model import BaseModule, bias_init_with_prob
 from mmengine.structures import InstanceData
 from torch import Tensor
@@ -364,6 +364,6 @@ class YOLOv6Head(YOLOv5Head):
         else:
             loss_bbox = flatten_pred_bboxes.sum() * 0
 
-        _, world_size = get_dist_info()
+        _, world_size = 0, 1 #get_dist_info()
         return dict(
             loss_cls=loss_cls * world_size, loss_bbox=loss_bbox * world_size)
