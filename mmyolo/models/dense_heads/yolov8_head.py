@@ -8,7 +8,7 @@ from mmcv.cnn import ConvModule
 from mmdet.models.utils import multi_apply
 from mmdet.utils import (ConfigType, OptConfigType, OptInstanceList,
                          OptMultiConfig)
-from mmengine.dist import get_dist_info
+# from mmengine.dist import get_dist_info
 from mmengine.model import BaseModule
 from mmengine.structures import InstanceData
 from torch import Tensor
@@ -389,7 +389,7 @@ class YOLOv8Head(YOLOv5Head):
         else:
             loss_bbox = flatten_pred_bboxes.sum() * 0
             loss_dfl = flatten_pred_bboxes.sum() * 0
-        _, world_size = get_dist_info()
+        _, world_size = 0, 1 #get_dist_info()
         return dict(
             loss_cls=loss_cls * num_imgs * world_size,
             loss_bbox=loss_bbox * num_imgs * world_size,
