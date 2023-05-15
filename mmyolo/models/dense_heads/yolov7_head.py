@@ -7,7 +7,7 @@ import torch.nn as nn
 from mmcv.cnn import ConvModule
 from mmdet.models.utils import multi_apply
 from mmdet.utils import ConfigType, OptInstanceList
-from mmengine.dist import get_dist_info
+# from mmengine.dist import get_dist_info
 from mmengine.structures import InstanceData
 from torch import Tensor
 
@@ -290,7 +290,7 @@ class YOLOv7Head(YOLOv5Head):
             loss_obj += self.aux_loss_weights * loss_obj_aux
             loss_box += self.aux_loss_weights * loss_box_aux
 
-        _, world_size = get_dist_info()
+        _, world_size = 0, 1  #get_dist_info()
         return dict(
             loss_cls=loss_cls * batch_size * world_size,
             loss_obj=loss_obj * batch_size * world_size,
