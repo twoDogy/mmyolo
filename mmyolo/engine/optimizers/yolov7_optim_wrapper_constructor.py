@@ -2,7 +2,7 @@
 from typing import Optional
 
 import torch.nn as nn
-from mmengine.dist import get_world_size
+# from mmengine.dist import get_world_size
 from mmengine.logging import print_log
 from mmengine.model import is_model_wrapper
 from mmengine.optim import OptimWrapper
@@ -89,7 +89,8 @@ class YOLOv7OptimWrapperConstructor:
             batch_size_per_gpu = optimizer_cfg.pop('batch_size_per_gpu')
             # No scaling if total_batch_size is less than
             # base_total_batch_size, otherwise linear scaling.
-            total_batch_size = get_world_size() * batch_size_per_gpu
+            # total_batch_size = get_world_size() * batch_size_per_gpu
+            total_batch_size = batch_size_per_gpu
             accumulate = max(
                 round(self.base_total_batch_size / total_batch_size), 1)
             scale_factor = total_batch_size * \
