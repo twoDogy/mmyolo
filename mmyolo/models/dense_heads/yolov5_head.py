@@ -11,7 +11,7 @@ from mmdet.structures.bbox import bbox_overlaps
 from mmdet.utils import (ConfigType, OptConfigType, OptInstanceList,
                          OptMultiConfig)
 from mmengine.config import ConfigDict
-from mmengine.dist import get_dist_info
+# from mmengine.dist import get_dist_info
 from mmengine.logging import print_log
 from mmengine.model import BaseModule
 from mmengine.structures import InstanceData
@@ -632,7 +632,7 @@ class YOLOv5Head(BaseDenseHead):
             else:
                 loss_cls += cls_scores[i].sum() * 0
 
-        _, world_size = get_dist_info()
+        _, world_size = 0, 1 #get_dist_info()
         return dict(
             loss_cls=loss_cls * batch_size * world_size,
             loss_obj=loss_obj * batch_size * world_size,
@@ -883,7 +883,7 @@ class YOLOv5Head(BaseDenseHead):
             else:
                 loss_cls += cls_scores[i].sum() * 0
 
-        _, world_size = get_dist_info()
+        _, world_size = 0, 1#get_dist_info()
         return dict(
             loss_cls=loss_cls * batch_size * world_size,
             loss_obj=loss_obj * batch_size * world_size,
